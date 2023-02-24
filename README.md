@@ -1,4 +1,6 @@
 <h1> Slider of top moments 💣
 
 <h4>
-<li> querySelector, Attribute, EventListener
+<li>querySelector
+<li>Attribute
+<li>EventListener
