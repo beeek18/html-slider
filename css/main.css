@@ -1,61 +1,75 @@
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #222;
+  box-sizing: border-box;
 }
 
-header {
-  margin-bottom: 30px;
-  padding: 15px 0;
-  background-color: #0000;
-  font-family: sans-serif;
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccc;
+}
+
+.wrapper {
+  display: flex;
+  max-width: 650px;
+  width: 100%;
+  height: 400px;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.wrapper i.button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  width: 36px;
+  background-color: #000;
+  border-radius: 50%;
   text-align: center;
-  color: #ffffff;
-}
-
-.logo {
-  font-weight: 600;
-  font-size: 18px;
-  margin-bottom: 10px;
-  background-color: #0000;
-
+  line-height: 36px;
   color: #fff;
+  font-size: 15px;
+  transition: all 0.3s linear;
+  z-index: 100;
+  cursor: pointer;
 }
 
-h1 {
-  font-size: 24px;
-  background-color: #0000;
-  color: #fff;
+i.button:active {
+  transform: scale(0.94) translateY(-50%);
 }
 
-.controls {
-  margin: 0 auto;
-  padding: 15px 0;
-  text-align: center;
+i#prev {
+  left: 25px;
+}
+i#next {
+  right: 25px;
 }
 
-button {
-  background-color: #ffffff; /* Green */
-  border: none;
-  border-radius: 10px;
-  color: rgb(0, 0, 0);
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+.img-container {
+  height: 320px;
+  max-width: 500px;
+  width: 100%;
+  overflow: hidden;
+}
+.img-container .carousel {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: all 0.4s ease;
 }
 
-/* Slider */
-
-.slider {
-  margin: 0 auto;
-  width: 800px;
-  height: 450px;
-  background-color: #222222;
-}
-
-.hidden {
-  display: none;
+.carousel img {
+  height: 100%;
+  width: 100%;
+  border-radius: 18px;
+  border: 10px solid #fff;
+  object-fit: cover;
 }

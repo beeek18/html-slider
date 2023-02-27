@@ -1,60 +1,33 @@
-// Elements on page
-const slider = document.querySelector("#slider")
-const sliderItems = Array.from(slider.children)
+const wrapper = document.querySelector('.wrapper'),
+  carousel = document.querySelector('.carousel'),
+  img = document.querySelectorAll('img'),
+  btn = document.querySelectorAll('.button');
 
-const btnNext = document.querySelector("#btnNext")
-const btnBack = document.querySelector("#btnBack")
+let imgIndex = 0,
+  intervalId;
 
-
-
-const showNextSlide = (direction) => {
-  // hidden current slide
-  const currentSlide = slider.querySelector('[data-active]');
-  const currentSlideIndex = +currentSlide.dataset.index
-
-  currentSlide.classList.add("hidden");
-  currentSlide.removeAttribute('data-active');
-
-
-  //Find next index depending on the direction of movement
-  let nextSlideIndex;
-
-  if (direction === 'next') {
-    nextSlideIndex = currentSlideIndex + 1 === sliderItems.length ? 0 : currentSlideIndex + 1
-  } else if (direction === 'back') {
-    nextSlideIndex = currentSlideIndex === 0 ? sliderItems.length - 1 : currentSlideIndex - 1
-  }
-
-  // show next slide
-  const nextSlide = slider.querySelector(`[data-index="${nextSlideIndex}"]`);
-
-  nextSlide.classList.remove("hidden")
-  nextSlide.setAttribute('data-active', '')
+const autoSlide = () => {
+  intervalId = setInterval(() => slideImg(++imgIndex), 2000)
 }
 
-sliderItems.forEach((slide, index) => {
-  // show only first slide
-  if (index !== 0) slide.classList.add("hidden")
+autoSlide()
 
-  // add index
-  slide.dataset.index = index;
+const slideImg = () => {
+  imgIndex = imgIndex === img.length ? 0 : imgIndex < 0 ? img.length - 1 : imgIndex;
 
-  // add data attribute active for first/active index
-  sliderItems[0].setAttribute('data-active', '')
-
-  // click to slide
-  slide.addEventListener("click", () => {
-    showNextSlide('next')
-  })
-})
-
-
-btnNext.onclick = () => {
-  showNextSlide('next')
-
+  carousel.style.transform = `translate(-${imgIndex * 100}%)`;
 }
 
-btnBack.onclick = () => {
-  showNextSlide('back')
+const updateClick = (e) => {
+  clearInterval(intervalId)
+
+  imgIndex += e.target.id === 'next' ? 1 : -1;
+
+  slideImg(imgIndex)
+  autoSlide()
 }
 
+btn.forEach(btn => btn.addEventListener('click', updateClick))
+
+wrapper.addEventListener("mouseover", () => clearInterval(intervalId))
+wrapper.addEventListener("mouseleave", autoSlide)
